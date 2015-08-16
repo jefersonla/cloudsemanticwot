@@ -11,5 +11,6 @@
     <name>MD-cswot</name>
   <modules>
     <module>MD-discovery-mDNSdevice</module>
+    <module>MD-discovery-deviceDriver</module>
   </modules>
 </project>
