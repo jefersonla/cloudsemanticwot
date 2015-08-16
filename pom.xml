@@ -9,4 +9,7 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
     <name>MD-cswot</name>
+  <modules>
+    <module>MD-discovery-device-service-mdns</module>
+  </modules>
 </project>
