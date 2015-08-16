@@ -10,6 +10,6 @@
     </properties>
     <name>MD-cswot</name>
   <modules>
-    <module>MD-discovery-device-service-mdns</module>
+    <module>MD-discovery-mDNSdevice</module>
   </modules>
 </project>

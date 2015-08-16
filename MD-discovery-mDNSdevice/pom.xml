@@ -8,11 +8,11 @@
   </parent>
 
     <groupId>br.com.semanticwot</groupId>
-    <artifactId>MD-discovery-device-service-mdns</artifactId>
+    <artifactId>MD-discovery-mDNSdevice</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <packaging>bundle</packaging>
 
-    <name>MD-discovery-device-service-mdns</name>
+    <name>MD-discovery-mDNSdevice</name>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
