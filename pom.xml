@@ -13,5 +13,8 @@
     <module>MD-discovery-mDNSdevice</module>
     <module>MD-discovery-deviceDriver</module>
     <module>MD-discovery-deviceTemplateAPP</module>
+    <module>MD-service-deviceDriver</module>
+    <module>MD-service-mDNSdevice</module>
+    <module>MD-service-deviceTemplateAPP</module>
   </modules>
 </project>
