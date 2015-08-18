@@ -2,19 +2,12 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <groupId>br.com.semanticwot</groupId>
-    <artifactId>cswot</artifactId>
+    <artifactId>PSWOT-cswot</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <packaging>pom</packaging>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
-    <name>MD-cswot</name>
-  <modules>
-    <module>MD-discovery-mDNSdevice</module>
-    <module>MD-discovery-deviceDriver</module>
-    <module>MD-discovery-deviceTemplateAPP</module>
-    <module>MD-service-deviceDriver</module>
-    <module>MD-service-mDNSdevice</module>
-    <module>MD-service-deviceTemplateAPP</module>
-  </modules>
+    <name>PSWOT-cswot</name>
+  <modules></modules>
 </project>
