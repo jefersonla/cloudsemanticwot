@@ -1,19 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
-    <groupId>br.com.semanticwot</groupId>
-    <artifactId>PSWOT-cswot</artifactId>
+    <groupId>avahi4j</groupId>
+    <artifactId>Avahi4j-Maven</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <packaging>pom</packaging>
+    <packaging>jar</packaging>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <maven.compiler.source>1.7</maven.compiler.source>
+        <maven.compiler.target>1.7</maven.compiler.target>
     </properties>
-    <name>PSWOT-cswot</name>
-  <modules>
-    <module>Avahi-tests</module>
-    <module>../pswot-java-spring-webapp</module>
-    <module>pswot-java-spring-webapp</module>
-    <module>Avahi4j-Maven</module>
-    <module>Avahi4j-Maven</module>
-  </modules>
 </project>
