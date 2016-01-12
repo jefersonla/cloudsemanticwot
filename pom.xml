@@ -9,5 +9,9 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
     <name>PSWOT-cswot</name>
-  <modules></modules>
+  <modules>
+    <module>Avahi-tests</module>
+    <module>../pswot-java-spring-webapp</module>
+    <module>pswot-java-spring-webapp</module>
+  </modules>
 </project>
