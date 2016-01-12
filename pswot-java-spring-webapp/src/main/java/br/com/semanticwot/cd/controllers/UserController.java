@@ -214,7 +214,13 @@ public class UserController {
 
             FileWriter fw = new FileWriter(formated.getAbsoluteFile());
             BufferedWriter bw = new BufferedWriter(fw);
-            bw.write(text.replace("{0}", String.valueOf(systemUser.getPort())));
+            
+            // Editando o settings_template.js
+            text = text.replace("{0}", String.valueOf(systemUser.getPort()));
+            text = text.replace("{1}", systemUser.getLogin());
+            text = text.replace("{2}", systemUser.getPassword());
+            
+            bw.write(text);
             bw.close();
 
         } catch (IOException ex) {
