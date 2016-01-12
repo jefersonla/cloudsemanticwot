@@ -7,3 +7,5 @@ release.properties
 dependency-reduced-pom.xml
 buildNumber.properties
 nbactions.xml
+/pswot-nodered-discovery-node/nbproject/private/
+/pswot-nodered-tdb-node/nbproject/private/

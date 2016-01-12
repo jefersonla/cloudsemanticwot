@@ -11,9 +11,7 @@
     <name>PSWOT-cswot</name>
   <modules>
     <module>Avahi-tests</module>
-    <module>../pswot-java-spring-webapp</module>
     <module>pswot-java-spring-webapp</module>
-    <module>Avahi4j-Maven</module>
     <module>Avahi4j-Maven</module>
   </modules>
 </project>
