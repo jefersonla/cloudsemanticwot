@@ -7,7 +7,7 @@
     <packaging>pom</packaging>
     <modules>
         <module>pswot-cloud-projects</module>
-        <module>pswot-gateway-projects/pswot-gateway</module>
+        <module>pswot-gateway-projects</module>
     </modules>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>

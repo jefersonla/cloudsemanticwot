@@ -6,9 +6,12 @@
     <version>0.0.1-SNAPSHOT</version>
     <packaging>pom</packaging>
     <modules>
-        <module>pswot-avahi4j-maven</module>
         <module>pswot-avahi-tests</module>
-    </modules>
+        <module>pswot-avahi4j-maven</module>
+    <module>pswot-gateway-service-zeroconf</module>
+    <module>pswot-gateway-service-modelmanager</module>
+    <module>pswot-gateway-service-drivermanager</module>
+  </modules>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
