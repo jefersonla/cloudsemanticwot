@@ -1,0 +1,26 @@
+<script type="text/javascript">
+    RED.nodes.registerType('Discovery',{
+        category: 'PSWoT',
+        color: '#A9D0F5',
+        defaults: {
+            name: {value:""}
+        },
+        inputs:1,
+        outputs:1,
+        icon: "white-globe.png",
+        label: function() {
+            return this.name||"PWoT Discovery";
+        }
+    });
+</script>
+
+<script type="text/x-red" data-template-name="Discovery">
+    <div class="form-row">
+        <label for="node-input-name"><i class="icon-tag"></i> Name</label>
+        <input type="text" id="node-input-name" placeholder="Name">
+    </div>
+</script>
+
+<script type="text/x-red" data-help-name="Discovery">
+    <p>A simple node that converts the message payloads into all lower-case characters</p>
+</script>

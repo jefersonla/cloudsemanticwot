@@ -6,7 +6,7 @@
         <artifactId>PSWOT-cswot</artifactId>
         <version>0.0.1-SNAPSHOT</version>
     </parent>
-    <artifactId>Avahi-tests</artifactId>
+    <artifactId>pswot-avahi-tests</artifactId>
     <packaging>jar</packaging>
     <properties>
         <maven.compiler.source>1.7</maven.compiler.source>
@@ -47,5 +47,5 @@
             </plugin>
         </plugins>
     </build>
-    
+    <name>pswot-avahi-tests</name>
 </project>

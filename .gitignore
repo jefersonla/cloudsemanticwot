@@ -9,3 +9,8 @@ buildNumber.properties
 nbactions.xml
 /pswot-nodered-discovery-node/nbproject/private/
 /pswot-nodered-tdb-node/nbproject/private/
+/nodes/nbproject/private/
+/pswot-nodered-sparql-node/nbproject/private/
+/pswot-nodered-projects/pswot-nodered-discovery-node/nbproject/private/
+/pswot-nodered-projects/pswot-nodered-sparql-node/nbproject/private/
+/pswot-nodered-projects/pswot-nodered-tdb-node/nbproject/private/
