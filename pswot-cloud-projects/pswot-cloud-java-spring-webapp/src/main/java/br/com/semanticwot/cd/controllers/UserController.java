@@ -18,6 +18,7 @@ import br.com.semanticwot.cd.models.SystemUser;
 import br.com.semanticwot.cd.models.User;
 import br.com.semanticwot.cd.util.Constants;
 import br.com.semanticwot.cd.util.EmailTemplates;
+import br.com.semanticwot.cd.util.PerfilStatus;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
@@ -79,11 +80,14 @@ public class UserController {
             return form(user, authentication); // Se tiver erro ele redireciona, se não tratar o erro da erro ao tentar salvar
         }
 
-        // Aqui eu tenho que converter a senha para crypto e adicionar as rules, para então eu criar um SystemUser
+        // Aqui eu tenho que converter a senha para crypto e 
+        // adicionar as rules, para então eu criar um SystemUser
         SystemUser systemUser = new SystemUser();
         systemUser.setName(user.getName());
+        systemUser.setPerfilstatus(user.getPerfilstatus());
+        // Encripta o password
         BCryptPasswordEncoder senhaBCrypt = new BCryptPasswordEncoder();
-        systemUser.setPassword(senhaBCrypt.encode(user.getPassword())); // Encripta o password
+        systemUser.setPassword(senhaBCrypt.encode(user.getPassword())); 
 
         // Tentar salvar ou atualizar o usuário
         if (authentication != null
@@ -91,6 +95,8 @@ public class UserController {
             SystemUser userAuth = (SystemUser) authentication.getPrincipal();
 
             // Verificando se ele tentou enviar um email diferente
+            // Acho que não precisa mais dessa verificacao
+            // já que eu posso capturar direcionar a excecao para uma funcao
             if (!userAuth.getLogin().equals(user.getLogin())) {
                 redirectAttributes.addFlashAttribute("info",
                         "The email can not be changed");
@@ -100,14 +106,29 @@ public class UserController {
             systemUser.setLogin(userAuth.getLogin());
             systemUser.setIp(userAuth.getIp());
             systemUser.setPort(userAuth.getPort());
-            
+
+            // Alterando para publicou ou privado somente se for atualizado
+            if (!systemUser.getPerfilstatus().equals(userAuth.getPerfilstatus())) {
+                try {
+                    createSettingsNodeRed(systemUser);
+                } catch (SettingsNodeRedNotCreated ex) {
+                    Logger.getLogger(UserController.class.getName())
+                            .log(Level.SEVERE, null, ex);
+                    throw new SettingsNodeRedNotCreated("Error when trying "
+                            + "to create the user");
+                }
+            }
+
             userDAO.update(systemUser);
 
             redirectAttributes.addFlashAttribute("info",
                     "User updated successfully");
 
+            return new ModelAndView("redirect:logout");
+            
             // Criando um novo usuário
         } else {
+            /* BEGIN Configurações automáticas */
             systemUser.setLogin(user.getLogin());
             List<Role> list = new ArrayList<>();
             list.add(ruleDAO.findByName("ROLE_ADMIN"));
@@ -118,6 +139,7 @@ public class UserController {
             if (ipAddress == null) {
                 ipAddress = request.getRemoteAddr();
             }
+
             systemUser.setIp(ipAddress);
             // Gerando uma porta para as portas liberadas no servidor
             systemUser.setPort((int) (1880 + Math.random() * 200));
@@ -128,6 +150,7 @@ public class UserController {
                 throw new UserEmailExists("Mail address "
                         + "is already registered");
             }
+            /* END Configurações automáticas */
 
             // Criar o arquivo settings dele
             try {
@@ -167,14 +190,17 @@ public class UserController {
 
     @RequestMapping("/form")
     public ModelAndView form(User user, Authentication authentication) { // Esse objeto produto é injetado automáticamento na view, porque ele está entrando como parâmetro, mesmo que ele não exista, é injetado como null dessa forma, não da erro quando eu tento acessar um product na view
+        // Carregando dados para o formulário
         if (authentication != null
                 && (authentication.getPrincipal() instanceof SystemUser)) {
             SystemUser systemUser = (SystemUser) authentication.getPrincipal();
             user.setLogin(systemUser.getLogin());
             user.setName(systemUser.getName());
             user.setPassword("");
+            user.setPerfilstatus(systemUser.getPerfilstatus());
         }
         ModelAndView modelAndView = new ModelAndView("user/form");
+        modelAndView.addObject("enums", PerfilStatus.values());
         return modelAndView;
     }
 
@@ -214,8 +240,16 @@ public class UserController {
 
             FileWriter fw = new FileWriter(formated.getAbsoluteFile());
             BufferedWriter bw = new BufferedWriter(fw);
-            
+
             // Editando o settings_template.js
+            if (systemUser.getPerfilstatus().equals(PerfilStatus.PRIVATE)) {
+                System.out.println("Entrei em privado");
+                text = text.replace("{PROFILE}", "httpNodeAuth: {user:\"{1}\",pass:\"{2}\"},");
+            }else{
+                System.out.println("Entrei em publico");
+                text = text.replace("{PROFILE}", "");
+            }
+            
             text = text.replace("{0}", String.valueOf(systemUser.getPort()));
             text = text.replace("{1}", systemUser.getLogin());
             text = text.replace("{2}", systemUser.getPassword());

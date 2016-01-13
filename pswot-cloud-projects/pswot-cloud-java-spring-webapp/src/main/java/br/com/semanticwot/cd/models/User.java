@@ -5,6 +5,8 @@
  */
 package br.com.semanticwot.cd.models;
 
+import br.com.semanticwot.cd.util.PerfilStatus;
+import javax.validation.constraints.NotNull;
 import org.hibernate.validator.constraints.NotBlank;
 
 /**
@@ -19,6 +21,16 @@ public class User {
     private String password;
     @NotBlank
     private String login;
+    @NotNull
+    private PerfilStatus perfilstatus;
+
+    public PerfilStatus getPerfilstatus() {
+        return perfilstatus;
+    }
+
+    public void setPerfilstatus(PerfilStatus perfilstatus) {
+        this.perfilstatus = perfilstatus;
+    }
 
     public String getName() {
         return name;

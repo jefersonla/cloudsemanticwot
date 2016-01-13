@@ -50,6 +50,12 @@
                                     <form:input path="name" required="true"/>
                                     <form:errors path="name"/>
                                 </div>
+                                <div class="field">
+                                    <label for="perfilstatus">Your services will be public?)</label>
+                                    <form:radiobuttons path="perfilstatus" 
+                                                       items="${enums}" />
+                                    <form:errors path="perfilstatus"/>
+                                </div>
                                 <ul class="actions">
                                     <li><input type="submit" value="Save">
                                     <li><input type="reset" value="Reset">   

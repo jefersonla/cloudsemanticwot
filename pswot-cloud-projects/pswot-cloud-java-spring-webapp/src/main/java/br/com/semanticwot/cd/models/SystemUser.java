@@ -1,5 +1,6 @@
 package br.com.semanticwot.cd.models;
 
+import br.com.semanticwot.cd.util.PerfilStatus;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -32,6 +33,17 @@ public class SystemUser implements UserDetails {
     private String ip;
     @NotNull
     private int port;
+    
+    @NotNull
+    private PerfilStatus perfilstatus;
+
+    public PerfilStatus getPerfilstatus() {
+        return perfilstatus;
+    }
+
+    public void setPerfilstatus(PerfilStatus perfilstatus) {
+        this.perfilstatus = perfilstatus;
+    }
     
     public String getLogin() {
         return login;
