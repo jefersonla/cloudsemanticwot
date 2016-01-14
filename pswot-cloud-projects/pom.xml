@@ -9,7 +9,8 @@
         <module>pswot-cloud-java-spring-webapp</module>
     <module>pswot-cloud-service-discovery</module>
     <module>pswot-cloud-service-model</module>
-  </modules>
+        <module>psowt-cloud-java-geonames-tests</module>
+    </modules>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>

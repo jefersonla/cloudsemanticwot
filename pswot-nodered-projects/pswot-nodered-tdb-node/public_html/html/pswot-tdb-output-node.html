@@ -1,0 +1,26 @@
+<script type="text/javascript">
+    RED.nodes.registerType('Triplestore',{
+        category: 'PSWoT',
+        color: '#F5D0A9',
+        defaults: {
+            name: {value:""}
+        },
+        inputs:1,
+        outputs:1,
+        icon: "db.png",
+        label: function() {
+            return this.name||"Triplestore";
+        }
+    });
+</script>
+
+<script type="text/x-red" data-template-name="Triplestore">
+    <div class="form-row">
+        <label for="node-input-name"><i class="icon-tag"></i> Name</label>
+        <input type="text" id="node-input-name" placeholder="Name">
+    </div>
+</script>
+
+<script type="text/x-red" data-help-name="Triplestore">
+    <p>A simple node that converts the message payloads into all lower-case characters</p>
+</script>

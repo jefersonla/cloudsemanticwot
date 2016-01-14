@@ -14,7 +14,7 @@ import javax.persistence.PersistenceContext;
  * Generic DAO
  *
  * @author nailton
- * @param <T>
+ * @param DAO class
  */
 public abstract class AbstractJpaDAO< T extends Serializable> {
 
