@@ -22,16 +22,20 @@ public class Main {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        WebService.setUserName("demo"); // add your username here
+        // Criar um usuário no Geonames
+        WebService.setUserName("****");
 
+        // O identificador único do local é o id dele, presente tambem na URI
+        // ex: http://sws.geonames.org/3450554/, indica salvador
         ToponymSearchCriteria searchCriteria = new ToponymSearchCriteria();
-        searchCriteria.setQ("zurich");
+        searchCriteria.setQ("salvador bahia");
         ToponymSearchResult searchResult;
         try {
             searchResult = WebService.search(searchCriteria);
             for (Toponym toponym : searchResult.getToponyms()) {
+            // Imprime o nome do local, o país e o id dele
             System.out.println(toponym.getName() + " " + toponym
-                    .getCountryName());
+                    .getCountryName() + " " + toponym.getGeoNameId());
         }
         } catch (Exception ex) {
             Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);

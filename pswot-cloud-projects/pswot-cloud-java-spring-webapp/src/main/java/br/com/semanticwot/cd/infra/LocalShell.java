@@ -13,22 +13,22 @@ package br.com.semanticwot.cd.infra;
 import java.io.BufferedReader;
 import java.io.Closeable;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
+//import java.io.InputStream;
+//import java.io.InputStreamReader;
 import java.io.Serializable;
 //import java.io.InputStream;
 //import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import org.springframework.context.annotation.Scope;
-import org.springframework.context.annotation.ScopedProxyMode;
+//import org.springframework.context.annotation.Scope;
+//import org.springframework.context.annotation.ScopedProxyMode;
 import org.springframework.stereotype.Component;
-import org.springframework.web.context.WebApplicationContext;
+//import org.springframework.web.context.WebApplicationContext;
 
 @Component
-@Scope(value = WebApplicationContext.SCOPE_SESSION,
-        proxyMode = ScopedProxyMode.TARGET_CLASS)
+//@Scope(value = WebApplicationContext.SCOPE_SESSION,
+//        proxyMode = ScopedProxyMode.TARGET_CLASS)
 public class LocalShell implements Serializable {
 
     private ProcessBuilder p;
@@ -42,6 +42,7 @@ public class LocalShell implements Serializable {
         commands.add("/bin/bash");
         commands.add("-c");
         commands.add(command);
+        System.out.println("Entrei em executeCommand");
         BufferedReader br = null;
         try {
             p = new ProcessBuilder(commands);
@@ -51,11 +52,12 @@ public class LocalShell implements Serializable {
 //            br = new BufferedReader(isr);
 //            String line;
 //            while ((line = br.readLine()) != null) {
-//                System.out.println("Retorno do comando = [" + line + "]");
+//              System.out.println("Retorno do comando = [" + line + "]");
 //            }
         } catch (IOException ioe) {
             log.log(Level.SEVERE, "Erro ao executar comando shell{0}", ioe
                     .getMessage());
+            System.out.println("ERROR IOException");
         } finally {
             secureClose(br);
         }
@@ -71,7 +73,7 @@ public class LocalShell implements Serializable {
         }
     }
 
-    // Solução provisória
+    // Solução provisória. Não estou conseguindo para o processo individual, mesmo com umas instancia por dessa classe por seção. Por seção da erro no ProcessBuilder, pois ele não pode ser serializavel
     public void stopCommand() {
         //this.process.destroy();
         executeCommand("killall node-red");

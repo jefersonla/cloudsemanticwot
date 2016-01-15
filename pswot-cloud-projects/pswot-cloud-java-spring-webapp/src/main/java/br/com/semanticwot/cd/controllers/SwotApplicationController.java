@@ -46,8 +46,7 @@ public class SwotApplicationController {
     private static final Logger LOGGER = Logger.getLogger(UserController.class
             .getName());
 
-    @Inject
-    private LocalShell shell;
+    private final LocalShell shell = new LocalShell();
 
     @RequestMapping(method = RequestMethod.POST, name = "saveApplication")
     public ModelAndView save(
@@ -142,11 +141,11 @@ public class SwotApplicationController {
                 + System.getProperty("user.home")
                 + System.getProperty("file.separator")
                 + "node-red && node-red "
-                + "--settings settings_" 
+                + "--settings settings_"
                 + systemUser.getLogin() 
                 + ".js " 
                 + systemUser.getLogin() 
-                + ".json && jobs";
+                + ".json";
         System.out.println(nodeCommand);
         shell.executeCommand(nodeCommand);
     }
