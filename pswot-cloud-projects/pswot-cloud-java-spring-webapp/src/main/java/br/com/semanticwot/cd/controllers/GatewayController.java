@@ -90,8 +90,11 @@ public class GatewayController {
         sSHManager.close();
 
         System.out.println("Imprimindo no SAVE " + gatewayForm.toString());
-
-        return new ModelAndView("redirect:/#install");
+        
+        ModelAndView modelAndView = new ModelAndView("redirect:/#install");
+        redirectAttributes.addFlashAttribute("info",
+                        "Gateway WoT successful install");
+        return modelAndView;
     }
 
     // @ModelAttribute define o nome do ComandName do form, 

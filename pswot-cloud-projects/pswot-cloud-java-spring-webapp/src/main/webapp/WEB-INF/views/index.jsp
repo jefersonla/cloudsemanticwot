@@ -183,12 +183,12 @@
                     <div class="inner" id="install">
                         <h2>Install WoT Gateway</h2>
                         <p>Edit text.</p>
+                        <div style="color: greenyellow; padding-bottom: 10px;">
+
+                            ${info}
+                        </div>
                         <div class="split style1">
                             <section>
-                                <div style="color: red">
-
-                                    ${info}
-                                </div>
                                 <ul class="actions">
                                         <li><a class="button special" href="<c:url value="/gateway/form"/>">Auto install with SSH</a></li>
                                         <li><a class="button" href="<c:url value="/docs"/>">Manual install</a></li>

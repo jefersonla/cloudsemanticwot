@@ -24,7 +24,6 @@ module.exports = function (RED) {
 
     var request = require('request');
     
-    
         function Discovery(config) {
         // AQUI ELE CHAMA ASSIM QUE O NODE É INICIADO OU 
         // QUANDO O NODE É COLOCADO NO DASHBOARD
@@ -86,6 +85,8 @@ module.exports = function (RED) {
                 if (!error && response.statusCode == 200) {
                     console.log(response.statusCode);
                     node.status({fill:"green",shape:"dot",text:"connected"});
+                    // Colocando a resposta no msg
+                    msg.payload = body;
                     // Modificar aqui com o código de não autorizado
                 }else if(error.code === "ECONNREFUSED"){
                     // Mostra no dashboard se o serviço tá dando pau
@@ -94,10 +95,6 @@ module.exports = function (RED) {
                     node.status({fill:"red",shape:"ring",text:"disconnected"});
                 }
             });
-
-            //console.log(node);
-
-            msg.payload = "teste";
             // Manda a mensagem para o proximo node
             node.send(msg);
         });

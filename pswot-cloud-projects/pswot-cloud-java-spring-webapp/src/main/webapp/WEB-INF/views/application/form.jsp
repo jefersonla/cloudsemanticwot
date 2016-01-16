@@ -21,71 +21,41 @@
         <script src="<c:url value="/resources/assets/js/util.js"/>"></script>
 
         <script>
-            setTimeout(function () {
+            $("form:first").submit(function () {
+                $("#loading").show();
+                $("form:first").hide();
+            });
+            
+            $("#nodered_button").click(function(){
                 var iframe = document.getElementById("iframenode");
                 iframe.src = iframe.src;
-            }, 5000);
-
-        </script>
-
-        <script>
-            $body = $("main");
-
-            $(document).on({
-                ajaxStart: function () {
-                    $body.addClass("loading");
-                },
-                ajaxStop: function () {
-                    $body.removeClass("loading");
-                }
             });
+
         </script>
     </jsp:attribute>
     <jsp:body>
-        <style>
-            /* Start by setting display:none to make this hidden.
-   Then we position it in relation to the viewport window
-   with position:fixed. Width, height, top and left speak
-   for themselves. Background we set to 80% white with
-   our animation centered, and no-repeating */
-            .modal {
-                display:    none;
-                position:   fixed;
-                z-index:    1000;
-                top:        0;
-                left:       0;
-                height:     100%;
-                width:      100%;
-                background: rgba( 255, 255, 255, .8 ) 
-                    url('http://i.stack.imgur.com/FhHRx.gif') 
-                    50% 50% 
-                    no-repeat;
-            }
-
-            /* When the body has the loading class, we turn
-               the scrollbar off with overflow:hidden */
-            body.loading {
-                overflow: hidden;   
-            }
-
-            /* Anytime the body has the loading class, our
-               modal element will be visible */
-            body.loading .modal {
-                display: block;
-            }
-        </style>
-
+        
         <!-- Wrapper -->
         <div id="wrapper">
             <!-- Main -->
             <section id="main" class="wrapper style5">
                 <div class="inner">
+                    <h2>Create SWoT Application</h2>
+                    <p>Edit text.</p>
                     <div class="split style1">
                         <section id="done">
                             <div style="color: red">
 
                                 ${info}
                             </div>
+                            <img id="loading" style="
+                             display: none; 
+                             position:relative;
+                             top:50%;
+                             left:50%;
+                             margin-top:-50px;
+                             margin-left:-50px;" 
+                             src="<c:url value="/resources/images/gears.svg"/>"/>
                             <form:form servletRelativeAction="/application" method="post" 
                                        commandName="swotApplicationForm" enctype="multipart/form-data">
                                 <div class="field">
@@ -114,7 +84,7 @@
 
                                     <br/>
                                     <br/>
-                                    <a class="button fit special" href="<c:url value="#nodered"/>">Node-RED Editor</a>
+                                    <a id="nodered_button" class="button fit special" href="<c:url value="#nodered"/>">Reload Node-RED</a>
                                 </li>
                             </ul>
                         </section>

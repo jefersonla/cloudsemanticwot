@@ -19,6 +19,15 @@
         <script src="<c:url value="/resources/assets/js/jquery.scrollex.min.js"/>"></script>
         <script src="<c:url value="/resources/assets/js/main.js"/>"></script>
         <script src="<c:url value="/resources/assets/js/util.js"/>"></script>
+
+        <script>
+            $("form:first").submit(function () {
+                $("#loading").show();
+                $("form:first").hide();
+            });
+
+        </script>
+
     </jsp:attribute>
     <jsp:body>
 
@@ -33,8 +42,16 @@
 
                             ${info}
                         </div>
-                        <!--commandName tem que ser o mesmo nome da po**a do parametro do metodo form-->
-                        <form:form servletRelativeAction="/gateway"
+                        <!--commandName tem que ser o mesmo nome da po**a do parametro do metodo form-->                
+                        <img id="loading" style="
+                             display: none; 
+                             position:relative;
+                             top:50%;
+                             left:50%;
+                             margin-top:-50px;
+                             margin-left:-50px;" 
+                             src="<c:url value="/resources/images/gears.svg"/>"/>
+                        <form:form id="form_gateway" servletRelativeAction="/gateway"
                                    method="post" 
                                    commandName="gateway" 
                                    enctype="multipart/form-data">
@@ -60,11 +77,11 @@
                             <div class="field">
                                 <label for="port">Port</label>
                                 <form:input path="port"
-                                            placeholder="22"/>
+                                            placeholder="22" required="true"/>
                                 <form:errors path="port"/>
                             </div>
                             <ul class="actions">
-                                <li><input type="submit" value="Save">
+                                <li><input id="submit_loading" type="submit" value="Save">
                                 <li><input type="reset" value="Reset">
                                 <li><a class="button" href="<c:url value="/#install"/>">Back</a></li>
                                 <li><a class="button special" href="<c:url value="/docs"/>">Tutorial</a></li>

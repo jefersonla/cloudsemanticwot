@@ -19,6 +19,15 @@
         <script src="<c:url value="/resources/assets/js/jquery.scrollex.min.js"/>"></script>
         <script src="<c:url value="/resources/assets/js/main.js"/>"></script>
         <script src="<c:url value="/resources/assets/js/util.js"/>"></script>
+        
+        <script>
+            $("form:first").submit(function () {
+                $("#loading").show();
+                $("form:first").hide();
+            });
+
+        </script>
+        
     </jsp:attribute>
     <jsp:body>
 
@@ -27,12 +36,22 @@
             <!-- Main -->
             <section id="main" class="wrapper">
                 <div class="inner">
+                    <h2>Create PSWoT user</h2>
+                    <p>Edit text.</p>
                     <div class="split style1">
                         <section>
                             <div style="color: red">
 
                                 ${info}
                             </div>
+                            <img id="loading" style="
+                             display: none; 
+                             position:relative;
+                             top:50%;
+                             left:50%;
+                             margin-top:-50px;
+                             margin-left:-50px;" 
+                             src="<c:url value="/resources/images/gears.svg"/>"/>
                             <form:form servletRelativeAction="/user" method="post" 
                                        commandName="user" enctype="multipart/form-data">
                                 <div class="field">
@@ -51,7 +70,7 @@
                                     <form:errors path="name"/>
                                 </div>
                                 <div class="field">
-                                    <label for="perfilstatus">Your services will be public?)</label>
+                                    <label for="perfilstatus">Your services will be public?</label>
                                     <form:radiobuttons path="perfilstatus" 
                                                        items="${enums}" />
                                     <form:errors path="perfilstatus"/>
