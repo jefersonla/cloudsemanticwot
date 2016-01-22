@@ -8,11 +8,11 @@
   </parent>
 
     <groupId>br.com.semanticwot</groupId>
-    <artifactId>pswot-cloud-service-model</artifactId>
+    <artifactId>pswot-cloud-java-discovery-client</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <packaging>war</packaging>
 
-    <name>pswot-cloud-service-model</name>
+    <name>pswot-cloud-java-discovery-client</name>
 
     <properties>
         <endorsed.dir>${project.build.directory}/endorsed</endorsed.dir>

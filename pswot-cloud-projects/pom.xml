@@ -7,10 +7,12 @@
     <packaging>pom</packaging>
     <modules>
         <module>pswot-cloud-java-spring-webapp</module>
-    <module>pswot-cloud-service-discovery</module>
-    <module>pswot-cloud-service-model</module>
         <module>psowt-cloud-java-geonames-tests</module>
-    </modules>
+    <module>pswot-cloud-java-discovery-client</module>
+        <module>pswot-cloud-java-discovery-service</module>
+        <module>pswot-cloud-java-model-service</module>
+    <module>pswot-cloud-java-model-client</module>
+  </modules>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
