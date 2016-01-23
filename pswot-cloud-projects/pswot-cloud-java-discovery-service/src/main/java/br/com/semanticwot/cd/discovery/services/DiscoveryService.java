@@ -16,8 +16,11 @@
 
 package br.com.semanticwot.cd.discovery.services;
 
+import br.com.semanticwot.cd.discovery.infra.City;
+import br.com.semanticwot.cd.discovery.infra.JerseyClient;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -59,7 +62,16 @@ public class DiscoveryService {
             throw new WebApplicationException(Response.Status.BAD_REQUEST);
         }
         
-        return Response.ok().build();
+        // Dessa forma eu dispenso ter que usar classes como empacotadores de entidades,
+        // ou seja, usando o GenericType do JAX-RS
+        JerseyClient client = new JerseyClient();
+        Object city = client.findAll_JSON(Object.class);
+         // do whatever with response
+        client.close();
+        
+        ArrayList<City> cit = (ArrayList<City>) city;
+        
+        return Response.ok(cit).build();
     }
 
     @GET
