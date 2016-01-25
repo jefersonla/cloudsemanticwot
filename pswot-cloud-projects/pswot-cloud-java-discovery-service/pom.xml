@@ -99,6 +99,20 @@
             <artifactId>jersey-media-moxy</artifactId>
             <version>2.22.1</version>
         </dependency>
+        
+        <!-- Jena -->
+        <dependency>
+            <groupId>org.apache.jena</groupId>
+            <artifactId>jena-core</artifactId>
+            <version>3.0.1</version>
+        </dependency>
+        
+        <dependency>
+            <groupId>org.apache.jena</groupId>
+            <artifactId>jena-arq</artifactId>
+            <version>3.0.1</version>
+        </dependency>
+        
     </dependencies>
 
     <build>

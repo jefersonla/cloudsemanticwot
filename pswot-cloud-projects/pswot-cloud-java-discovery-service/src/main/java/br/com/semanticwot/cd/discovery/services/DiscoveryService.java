@@ -69,9 +69,7 @@ public class DiscoveryService {
          // do whatever with response
         client.close();
         
-        ArrayList<City> cit = (ArrayList<City>) city;
-        
-        return Response.ok(cit).build();
+        return Response.ok((ArrayList<City>) city).build();
     }
 
     @GET
