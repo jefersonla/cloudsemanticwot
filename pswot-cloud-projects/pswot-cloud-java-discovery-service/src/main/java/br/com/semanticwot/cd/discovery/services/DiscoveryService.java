@@ -24,6 +24,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.annotation.security.RolesAllowed;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
@@ -52,6 +53,7 @@ import javax.ws.rs.core.Response;
     MediaType.APPLICATION_JSON})
 public class DiscoveryService {
 
+    @RolesAllowed("USER")
     @GET
     @Path("{type}")
     public Response discovery(@PathParam("type") String typeOfDevice,
@@ -72,6 +74,7 @@ public class DiscoveryService {
         return Response.ok((ArrayList<City>) city).build();
     }
 
+    @RolesAllowed("USER")
     @GET
     @Path("{type}/query")
     public Response query(@PathParam("type") String typeOfDevice,

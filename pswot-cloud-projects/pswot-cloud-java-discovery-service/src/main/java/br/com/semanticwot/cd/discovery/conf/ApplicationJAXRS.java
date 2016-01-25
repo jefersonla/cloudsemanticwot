@@ -60,7 +60,9 @@ public class ApplicationJAXRS extends Application {
     // Teoricamente, esse método está se atualizando sozinho, adicionando as classes de serviço para a servelet do JAX-RS analisar.
     private void addRestResourceClasses(
             Set<Class<?>> resources) {
-        resources.add(br.com.semanticwot.cd.discovery.conf.CrossOriginResourceSharingFilter.class);
+        resources.add(br.com.semanticwot.cd.discovery.conf.AuthenticationFilter.class);
+        resources.add(br.com.semanticwot.cd.discovery
+                .conf.CrossOriginResourceSharingFilter.class);
         resources.add(br.com.semanticwot.cd.discovery.services.DiscoveryService.class);
     }
 
