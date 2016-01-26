@@ -22,6 +22,13 @@
     </properties>
     
     <dependencies>
+        <!-- Verificar senha -->
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-crypto</artifactId>
+            <version>4.0.3.RELEASE</version>
+        </dependency>
+
         
         <!-- Solução para o MessageBodyReader not found for media type=application/json -->
         <dependency>
@@ -113,6 +120,30 @@
             <artifactId>jena-arq</artifactId>
             <version>3.0.1</version>
         </dependency>
+        
+        <!-- Outros -->
+        <dependency>
+            <groupId>org.apache.poi</groupId>
+            <artifactId>poi</artifactId>
+            <version>3.9</version>
+        </dependency>
+        <dependency>
+            <groupId>xml-apis</groupId>
+            <artifactId>xml-apis</artifactId>
+            <version>1.4.01</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.poi</groupId>
+            <artifactId>poi-ooxml</artifactId>
+            <version>3.9</version>
+            <exclusions>
+                <exclusion>
+                    <artifactId>xml-apis</artifactId>
+                    <groupId>xml-apis</groupId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        
     </dependencies>
 
     <build>

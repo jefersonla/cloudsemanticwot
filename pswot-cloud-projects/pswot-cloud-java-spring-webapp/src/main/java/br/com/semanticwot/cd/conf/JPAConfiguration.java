@@ -42,7 +42,7 @@ public class JPAConfiguration {
     public DataSource dataSource(Environment environment) { // configuração do objeto para fonte de dados
         DriverManagerDataSource dataSource = new DriverManagerDataSource();
         dataSource.setDriverClassName("com.mysql.jdbc.Driver");
-        dataSource.setUrl("jdbc:mysql://localhost:3306/casadocodigoexercicio");
+        dataSource.setUrl("jdbc:mysql://localhost:3306/pswotcloud");
         dataSource.setUsername("root");
         dataSource.setPassword("231188202020");
         return dataSource;

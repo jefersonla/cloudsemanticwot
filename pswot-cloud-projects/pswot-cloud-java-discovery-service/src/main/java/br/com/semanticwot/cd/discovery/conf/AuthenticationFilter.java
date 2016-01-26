@@ -19,8 +19,12 @@ package br.com.semanticwot.cd.discovery.conf;
  *
  * @author nailton
  */
+import br.com.semanticwot.cd.discovery.models.Role;
+import br.com.semanticwot.cd.discovery.models.SystemUser;
+import br.com.semanticwot.cd.discovery.models.SystemUserFacade;
 import java.lang.reflect.Method;
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -38,6 +42,7 @@ import javax.ws.rs.core.Response;
 import javax.ws.rs.ext.Provider;
 
 import org.glassfish.jersey.internal.util.Base64;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 /**
  * This filter verify the access permissions for a user based on username and
@@ -96,9 +101,8 @@ public class AuthenticationFilter implements ContainerRequestFilter {
             final String password = tokenizer.nextToken();
 
             //Verifying Username and password
-            System.out.println(username);
-            System.out.println(password);
-
+            //System.out.println(username);
+            //System.out.println(password);
             //Verify user access
             if (method.isAnnotationPresent(RolesAllowed.class)) {
                 RolesAllowed rolesAnnotation = method.getAnnotation(
@@ -127,12 +131,36 @@ public class AuthenticationFilter implements ContainerRequestFilter {
         //If both match then get the defined role for user from database and continue; else return isAllowed [false]
         //Access the database and do this part yourself
         //String userRole = userMgr.getUserRole(username);
-        if (username.equals("howtodoinjava") && password.equals("password")) {
-            String userRole = "USER";
+        SystemUserFacade facade = new SystemUserFacade();
+        SystemUser user = facade.find(username);
 
-            //Step 2. Verify user role
-            if (rolesSet.contains(userRole)) {
-                isAllowed = true;
+        // Não existe usuário com esse nome
+        if (user == null) {
+            return false;
+        }
+
+        BCryptPasswordEncoder senhaBCrypt = new BCryptPasswordEncoder();
+        String BCryptpassword = senhaBCrypt.encode(password);
+
+        System.out.println("DISCOVERY " + user.getLogin());
+        System.out.println("DISCOVERY " + user.getPassword());
+        System.out.println("DISCOVERY " + password);
+        System.out.println("DISCOVERY " + BCryptpassword);
+
+        // Verificando se a senha confere, tem que usar o matches, pois
+        // o hash não é o mesmo para os mesmos caracteres
+        // parece que o hash é diferente para cada aplicação
+        // mais ele consegue validar se o hash é válido
+        if (senhaBCrypt.matches(password, user.getPassword())) {
+
+            System.out.println("DISCOVERY OK PASSWORD");
+            
+            for (Role role : user.getRoleCollection()) {
+                System.out.println("DISCOVERY " + role.getName());
+                //Step 2. Verify user role
+                if (rolesSet.contains(role.getName())) {
+                    isAllowed = true;
+                }
             }
         }
         return isAllowed;

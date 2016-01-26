@@ -16,6 +16,7 @@
 
 package br.com.semanticwot.cd.discovery.services;
 
+import br.com.semanticwot.cd.discovery.cache.Cached;
 import br.com.semanticwot.cd.discovery.infra.City;
 import br.com.semanticwot.cd.discovery.infra.JerseyClient;
 import java.text.ParseException;
@@ -26,14 +27,17 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.annotation.security.RolesAllowed;
 import javax.ws.rs.Consumes;
+import javax.ws.rs.DefaultValue;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
 import javax.ws.rs.WebApplicationException;
+import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import javax.ws.rs.core.UriInfo;
 
 /* Esse serviço deve atender a essas requisições, o mesmo para umidity */
 // http://localhost:8080/discovery/v0.1/temperature/query/?location=Salvador&datestart=2016-01-05&dateend=2016-01-22
@@ -51,14 +55,18 @@ import javax.ws.rs.core.Response;
     MediaType.APPLICATION_JSON})
 @Produces({MediaType.TEXT_XML, MediaType.APPLICATION_XML,
     MediaType.APPLICATION_JSON})
+@Cached
 public class DiscoveryService {
 
-    @RolesAllowed("USER")
+    @Context
+    private UriInfo uriInfo;
+    
+    @RolesAllowed("ROLE_ADMIN")
     @GET
     @Path("{type}")
     public Response discovery(@PathParam("type") String typeOfDevice,
             @QueryParam("location") String location,
-            @QueryParam("matching") String matching) {
+            @QueryParam("matching") @DefaultValue("exact") String matching) {
 
         if (location == null || matching == null) {
             throw new WebApplicationException(Response.Status.BAD_REQUEST);
@@ -74,7 +82,7 @@ public class DiscoveryService {
         return Response.ok((ArrayList<City>) city).build();
     }
 
-    @RolesAllowed("USER")
+    @RolesAllowed("ROLE_ADMIN")
     @GET
     @Path("{type}/query")
     public Response query(@PathParam("type") String typeOfDevice,

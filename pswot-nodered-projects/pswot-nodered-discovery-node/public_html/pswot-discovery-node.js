@@ -81,14 +81,14 @@ module.exports = function (RED) {
                 node.warn("Requisição gerada " + req);
                 node.warn("Erro na requisicao " + error);
                 node.status({fill:"blue",shape:"dot",text:"sending request"});
-                console.log(error.code);
+                //console.log(error.code);
                 if (!error && response.statusCode == 200) {
                     console.log(response.statusCode);
                     node.status({fill:"green",shape:"dot",text:"connected"});
                     // Colocando a resposta no msg
                     msg.payload = body;
                     // Modificar aqui com o código de não autorizado
-                }else if(error.code === "ECONNREFUSED"){
+                }else if(error === "ECONNREFUSED"){
                     // Mostra no dashboard se o serviço tá dando pau
                     node.status({fill:"yellow",shape:"ring",text:"not authorized"});
                 }else{

@@ -13,9 +13,9 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 package br.com.semanticwot.cd.discovery.conf;
 
+import br.com.semanticwot.cd.discovery.cache.CacheInterceptor;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
@@ -46,7 +46,7 @@ public class ApplicationJAXRS extends Application {
         Set<Object> singletons = new HashSet<>();
 
         singletons.add(new JettisonFeature());
-        //singletons.add(new CacheInterceptor());
+        singletons.add(new CacheInterceptor());
         return singletons;
     }
     
@@ -57,12 +57,13 @@ public class ApplicationJAXRS extends Application {
         return resources;
     }
     
-    // Teoricamente, esse método está se atualizando sozinho, adicionando as classes de serviço para a servelet do JAX-RS analisar.
+    // Teoricamente, esse método está se atualizando sozinho, adicionando as classes de serviço para a servlet do JAX-RS analisar.
     private void addRestResourceClasses(
             Set<Class<?>> resources) {
-        resources.add(br.com.semanticwot.cd.discovery.conf.AuthenticationFilter.class);
+        resources.add(br.com.semanticwot.cd.discovery.cache.CacheInterceptor.class);
         resources.add(br.com.semanticwot.cd.discovery
-                .conf.CrossOriginResourceSharingFilter.class);
+                .conf.AuthenticationFilter.class);
+        resources.add(br.com.semanticwot.cd.discovery.conf.CrossOriginResourceSharingFilter.class);
         resources.add(br.com.semanticwot.cd.discovery.services.DiscoveryService.class);
     }
 

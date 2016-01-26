@@ -9,6 +9,7 @@ import br.com.semanticwot.cd.daos.IRuleDAO;
 import br.com.semanticwot.cd.daos.IUserDAO;
 import br.com.semanticwot.cd.daos.RuleDAO;
 import br.com.semanticwot.cd.daos.UserDAO;
+import br.com.semanticwot.cd.exceptions.EmailNotSend;
 import br.com.semanticwot.cd.exceptions.SettingsNodeRedNotCreated;
 import br.com.semanticwot.cd.exceptions.UserEmailExists;
 import br.com.semanticwot.cd.infra.MailManager;
@@ -172,16 +173,18 @@ public class UserController {
             // Mensagem de sucesso para a tela de login
             redirectAttributes.addFlashAttribute("info",
                     "User created successfully");
-
-            try {
-                // Enviando o Email
-                mailManager.sendNewPurchaseMail(systemUser,
-                        EmailTemplates.registerTemplate);
-                // Se Email não for enviado
-            } catch (MessagingException ex) {
-                Logger.getLogger(UserController.class.getName())
-                        .log(Level.SEVERE, null, ex);
-            }
+              // Desativando temporariamente
+//            try {
+//                // Enviando o Email
+//                mailManager.sendNewPurchaseMail(systemUser,
+//                        EmailTemplates.registerTemplate);
+//                // Se Email não for enviado
+//            } catch (MessagingException ex) {
+//                Logger.getLogger(UserController.class.getName())
+//                        .log(Level.SEVERE, null, ex);
+//                throw new EmailNotSend("Error when trying "
+//                        + "send the Email");
+//            }
 
         }
 
@@ -267,7 +270,8 @@ public class UserController {
 
     /* TRATAMENTO DE ERROS COM @ExceptionHandler */
     // Voce pode capturar vários tipos de erro, é só usar a @ExceptionHandler
-    @ExceptionHandler({UserEmailExists.class, SettingsNodeRedNotCreated.class})
+    @ExceptionHandler({UserEmailExists.class, 
+        SettingsNodeRedNotCreated.class, EmailNotSend.class})
     public ModelAndView handleError(HttpServletRequest req, Exception exception) {
         LOGGER.log(Level.WARNING, "Request: {0} raised {1}",
                 new Object[]{req.getRequestURL(),
