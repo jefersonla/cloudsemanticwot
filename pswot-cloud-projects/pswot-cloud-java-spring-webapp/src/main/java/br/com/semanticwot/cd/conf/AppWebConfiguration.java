@@ -165,9 +165,9 @@ public class AppWebConfiguration extends WebMvcConfigurerAdapter{
 
         JavaMailSenderImpl javaMailSenderImpl = new JavaMailSenderImpl();
         javaMailSenderImpl.setHost("smtp.gmail.com");
-        javaMailSenderImpl.setPassword("voghooouiekmtvjh");
+        javaMailSenderImpl.setPassword("senhadeapp");
         javaMailSenderImpl.setPort(587);
-        javaMailSenderImpl.setUsername("notlian.junior");
+        javaMailSenderImpl.setUsername("wiser");
         Properties mailProperties = new Properties();
         mailProperties.put("mail.smtp.auth", true);
         mailProperties.put("mail.smtp.starttls.enable", true);

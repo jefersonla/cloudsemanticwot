@@ -24,7 +24,6 @@ import br.com.semanticwot.cd.discovery.models.SystemUser;
 import br.com.semanticwot.cd.discovery.models.SystemUserFacade;
 import java.lang.reflect.Method;
 import java.util.Arrays;
-import java.util.Collection;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -48,7 +47,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
  * This filter verify the access permissions for a user based on username and
  * passowrd provided in request
  * */
-@Provider
+//@Provider
 public class AuthenticationFilter implements ContainerRequestFilter {
 
     @Context
@@ -139,19 +138,17 @@ public class AuthenticationFilter implements ContainerRequestFilter {
             return false;
         }
 
-        BCryptPasswordEncoder senhaBCrypt = new BCryptPasswordEncoder();
-        String BCryptpassword = senhaBCrypt.encode(password);
-
-        System.out.println("DISCOVERY " + user.getLogin());
-        System.out.println("DISCOVERY " + user.getPassword());
-        System.out.println("DISCOVERY " + password);
-        System.out.println("DISCOVERY " + BCryptpassword);
+        // Debug de dados do usuário
+        //System.out.println("DISCOVERY " + user.getLogin());
+        //System.out.println("DISCOVERY " + user.getPassword());
+        //System.out.println("DISCOVERY " + password);
+        //System.out.println("DISCOVERY " + BCryptpassword);
 
         // Verificando se a senha confere, tem que usar o matches, pois
         // o hash não é o mesmo para os mesmos caracteres
         // parece que o hash é diferente para cada aplicação
         // mais ele consegue validar se o hash é válido
-        if (senhaBCrypt.matches(password, user.getPassword())) {
+        if (new BCryptPasswordEncoder().matches(password, user.getPassword())) {
 
             System.out.println("DISCOVERY OK PASSWORD");
             

@@ -32,11 +32,17 @@ import javax.ws.rs.client.WebTarget;
  * @author nailton
  */
 public class JerseyClient {
+
     private WebTarget webTarget;
     private Client client;
     private static final String BASE_URI
             = "http://localhost:8080/WS-Aula05-Hibernate-RESTFul/webresources";
 
+    // Dessa forma eu consigo usar um cliente gerado automáticamente
+    //JerseyClient client = new JerseyClient();
+    //Object city = client.findAll_JSON(Object.class);
+    //client.close();
+    //return Response.ok((ArrayList<City>) city).build();
     public JerseyClient() {
         client = javax.ws.rs.client.ClientBuilder.newClient();
         webTarget
@@ -78,7 +84,7 @@ public class JerseyClient {
         webTarget.path(java.text.MessageFormat.format("{0}", new Object[]{id}))
                 .request(javax.ws.rs.core.MediaType.APPLICATION_XML)
                 .put(javax.ws.rs.client.Entity.entity(requestEntity,
-                javax.ws.rs.core.MediaType.APPLICATION_XML));
+                                javax.ws.rs.core.MediaType.APPLICATION_XML));
     }
 
     public void edit_JSON(Object requestEntity, String id) throws
@@ -86,19 +92,19 @@ public class JerseyClient {
         webTarget.path(java.text.MessageFormat.format("{0}", new Object[]{id}))
                 .request(javax.ws.rs.core.MediaType.APPLICATION_JSON)
                 .put(javax.ws.rs.client.Entity.entity(requestEntity,
-                javax.ws.rs.core.MediaType.APPLICATION_JSON));
+                                javax.ws.rs.core.MediaType.APPLICATION_JSON));
     }
 
     public void create_XML(Object requestEntity) throws ClientErrorException {
         webTarget.request(javax.ws.rs.core.MediaType.APPLICATION_XML)
                 .post(javax.ws.rs.client.Entity.entity(requestEntity,
-                javax.ws.rs.core.MediaType.APPLICATION_XML));
+                                javax.ws.rs.core.MediaType.APPLICATION_XML));
     }
 
     public void create_JSON(Object requestEntity) throws ClientErrorException {
         webTarget.request(javax.ws.rs.core.MediaType.APPLICATION_JSON)
                 .post(javax.ws.rs.client.Entity.entity(requestEntity,
-                javax.ws.rs.core.MediaType.APPLICATION_JSON));
+                                javax.ws.rs.core.MediaType.APPLICATION_JSON));
     }
 
     public <T> T findRange_XML(Class<T> responseType, String from, String to)
@@ -106,7 +112,7 @@ public class JerseyClient {
         WebTarget resource = webTarget;
         resource
                 = resource.path(java.text.MessageFormat.format("{0}/{1}",
-                new Object[]{from, to}));
+                                new Object[]{from, to}));
         return resource.request(javax.ws.rs.core.MediaType.APPLICATION_XML)
                 .get(responseType);
     }
@@ -116,7 +122,7 @@ public class JerseyClient {
         WebTarget resource = webTarget;
         resource
                 = resource.path(java.text.MessageFormat.format("{0}/{1}",
-                new Object[]{from, to}));
+                                new Object[]{from, to}));
         return resource.request(javax.ws.rs.core.MediaType.APPLICATION_JSON)
                 .get(responseType);
     }
@@ -126,7 +132,7 @@ public class JerseyClient {
         WebTarget resource = webTarget;
         resource
                 = resource.path(java.text.MessageFormat.format("{0}",
-                new Object[]{id}));
+                                new Object[]{id}));
         return resource.request(javax.ws.rs.core.MediaType.APPLICATION_XML)
                 .get(responseType);
     }
@@ -136,7 +142,7 @@ public class JerseyClient {
         WebTarget resource = webTarget;
         resource
                 = resource.path(java.text.MessageFormat.format("{0}",
-                new Object[]{id}));
+                                new Object[]{id}));
         return resource.request(javax.ws.rs.core.MediaType.APPLICATION_JSON)
                 .get(responseType);
     }
@@ -146,8 +152,10 @@ public class JerseyClient {
     }
 
     public final void setUsernamePassword(String username, String password) {
-        webTarget.register(new org.glassfish.jersey.client.filter.HttpBasicAuthFilter(username,
-                password));
+        webTarget.register(
+                new org.glassfish.jersey.client.filter.HttpBasicAuthFilter(
+                        username,
+                        password));
     }
-    
+
 }

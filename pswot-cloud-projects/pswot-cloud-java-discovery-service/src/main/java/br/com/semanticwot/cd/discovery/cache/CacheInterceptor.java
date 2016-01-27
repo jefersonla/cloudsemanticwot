@@ -72,7 +72,8 @@ public class CacheInterceptor implements ContainerRequestFilter,
 
     }
 
-	//Invocado na resposta
+    // Invocado na resposta, para qualquer tipo de requisição.
+    // Se eu mandar um POST, ele atualiza o path com a data atual
     @Override
     public void filter(ContainerRequestContext requestContext,
             ContainerResponseContext responseContext) throws IOException {

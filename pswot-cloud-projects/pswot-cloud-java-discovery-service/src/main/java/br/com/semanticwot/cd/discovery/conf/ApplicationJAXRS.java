@@ -16,6 +16,8 @@
 package br.com.semanticwot.cd.discovery.conf;
 
 import br.com.semanticwot.cd.discovery.cache.CacheInterceptor;
+import br.com.semanticwot.cd.discovery.services.DiscoveryService;
+import io.swagger.jaxrs.config.BeanConfig;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
@@ -31,6 +33,19 @@ import org.glassfish.jersey.jettison.JettisonFeature;
 // Preciso do web.xml de qualquer forma.
 @ApplicationPath("discovery/v0.1")
 public class ApplicationJAXRS extends Application {
+
+    // Configurando o Swagger, pode ser por web.xml
+    // porém dessa forma vc tem muito mais controle
+    public ApplicationJAXRS() {
+        BeanConfig beanConfig = new BeanConfig();
+        beanConfig.setVersion("1.0.2");
+        beanConfig.setSchemes(new String[]{"http"});
+        beanConfig.setHost("localhost:8080");
+        beanConfig.setBasePath("/discovery/v0.1");
+        beanConfig.setResourcePackage(DiscoveryService.class.getPackage().getName());
+        beanConfig.setScan(true);
+        
+    }
 
     @Override
     public Map<String, Object> getProperties() {
@@ -49,22 +64,26 @@ public class ApplicationJAXRS extends Application {
         singletons.add(new CacheInterceptor());
         return singletons;
     }
-    
-        @Override
+
+    @Override
     public Set<Class<?>> getClasses() {
         Set<Class<?>> resources = new java.util.HashSet<>();
         addRestResourceClasses(resources);
         return resources;
     }
-    
-    // Teoricamente, esse método está se atualizando sozinho, adicionando as classes de serviço para a servlet do JAX-RS analisar.
+
     private void addRestResourceClasses(
             Set<Class<?>> resources) {
-        resources.add(br.com.semanticwot.cd.discovery.cache.CacheInterceptor.class);
-        resources.add(br.com.semanticwot.cd.discovery
-                .conf.AuthenticationFilter.class);
-        resources.add(br.com.semanticwot.cd.discovery.conf.CrossOriginResourceSharingFilter.class);
-        resources.add(br.com.semanticwot.cd.discovery.services.DiscoveryService.class);
+        resources.add(
+                br.com.semanticwot.cd.discovery.cache.CacheInterceptor.class);
+        // Recurso de segurança
+        //resources.add(
+        //        br.com.semanticwot.cd.discovery.conf.AuthenticationFilter.class);
+        resources.add(
+                br.com.semanticwot.cd.discovery.conf.CrossOriginResourceSharingFilter.class);
+        resources.add(
+                br.com.semanticwot.cd.discovery.services.DiscoveryService.class);
+
     }
 
 }

@@ -13,15 +13,11 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 package br.com.semanticwot.cd.discovery.services;
 
 import br.com.semanticwot.cd.discovery.cache.Cached;
-import br.com.semanticwot.cd.discovery.infra.City;
-import br.com.semanticwot.cd.discovery.infra.JerseyClient;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -38,11 +34,15 @@ import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriInfo;
+import org.geonames.Toponym;
+import org.geonames.ToponymSearchCriteria;
+import org.geonames.ToponymSearchResult;
+import org.geonames.WebService;
 
 /* Esse serviço deve atender a essas requisições, o mesmo para umidity */
 // http://localhost:8080/discovery/v0.1/temperature/query/?location=Salvador&datestart=2016-01-05&dateend=2016-01-22
 // http://localhost:8080/discovery/v0.1/temperature/?location=salvador&matching=exact
-//1) Adicionar o cache 
+//1) Adicionar o cache - OK
 //2) Adicionar o interceptador para requisições assincronas, - OK
 //      ver se funcionou o gerado automáticamente pelo netbeans - OK
 //3) Aqui eu vou primeiro usar o location para recuperar a localização 
@@ -60,7 +60,7 @@ public class DiscoveryService {
 
     @Context
     private UriInfo uriInfo;
-    
+
     @RolesAllowed("ROLE_ADMIN")
     @GET
     @Path("{type}")
@@ -71,15 +71,34 @@ public class DiscoveryService {
         if (location == null || matching == null) {
             throw new WebApplicationException(Response.Status.BAD_REQUEST);
         }
-        
-        // Dessa forma eu dispenso ter que usar classes como empacotadores de entidades,
-        // ou seja, usando o GenericType do JAX-RS
-        JerseyClient client = new JerseyClient();
-        Object city = client.findAll_JSON(Object.class);
-         // do whatever with response
-        client.close();
-        
-        return Response.ok((ArrayList<City>) city).build();
+
+        // Adicionando a busca com o Geonames
+        // Tive que criar um usuário no site do Geonames
+        // Tive que instalar a dependencia do Geonames no repositório local 
+        // com o projeto de testes por que a versão mais nova da API não 
+        // está no repositório Maven
+        //WebService.setUserName("pswot");
+
+        // O identificador único do local é o id dele, presente tambem na URI
+        // ex: http://sws.geonames.org/3450554/, indica salvador
+//        ToponymSearchCriteria searchCriteria = new ToponymSearchCriteria();
+//        searchCriteria.setQ(location);
+//        ToponymSearchResult searchResult;
+//        try {
+//            searchResult = WebService.search(searchCriteria);
+//            for (Toponym toponym : searchResult.getToponyms()) {
+//                // Imprime o nome do local, o país e o id dele
+//                System.out.println(toponym.getName() + " " + toponym
+//                        .getCountryName() + " " + toponym.getGeoNameId());
+//            }
+//            
+//        } catch (Exception ex) {
+//            Logger.getLogger(DiscoveryService.class.getName()).log(Level.SEVERE,
+//                    null, ex);
+//            throw new WebApplicationException(Response.Status.BAD_REQUEST);
+//        }
+
+        return Response.ok().build();
     }
 
     @RolesAllowed("ROLE_ADMIN")
@@ -93,7 +112,6 @@ public class DiscoveryService {
         // Verificando se foram passados todos os parametros
         if (location == null || datestart == null || dateend == null) {
             throw new WebApplicationException(Response.Status.BAD_REQUEST);
-
         }
 
         // Verificando se as datas estão corretas
@@ -106,9 +124,8 @@ public class DiscoveryService {
                     .log(Level.SEVERE, null, ex);
             throw new WebApplicationException(Response.Status.BAD_REQUEST);
         }
-        
+
         // Criando a consulta SPARQL
-        
         return Response.ok().build();
     }
 
