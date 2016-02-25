@@ -18,10 +18,13 @@ package br.com.semanticwot.cd.discovery.conf;
 import br.com.semanticwot.cd.discovery.cache.CacheInterceptor;
 import br.com.semanticwot.cd.discovery.services.DiscoveryService;
 import io.swagger.jaxrs.config.BeanConfig;
+import io.swagger.models.auth.BasicAuthDefinition;
+import io.swagger.models.auth.SecuritySchemeDefinition;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
+import java.util.TreeMap;
 import javax.ws.rs.ApplicationPath;
 
 import javax.ws.rs.core.Application;
@@ -37,12 +40,23 @@ public class ApplicationJAXRS extends Application {
     // Configurando o Swagger, pode ser por web.xml
     // porém dessa forma vc tem muito mais controle
     public ApplicationJAXRS() {
+        
+        // Configurando o Swagger de forma programática
         BeanConfig beanConfig = new BeanConfig();
-        beanConfig.setVersion("1.0.2");
-        beanConfig.setSchemes(new String[]{"http"});
+        // Básico
+        //beanConfig.setTitle("Discovery Service");
+        //beanConfig.setVersion("0.1");
+        //beanConfig.setSchemes(new String[]{"http"});
         beanConfig.setHost("localhost:8080");
-        beanConfig.setBasePath("/discovery/v0.1");
+        beanConfig.setBasePath("/pswot/discovery/v0.1");
         beanConfig.setResourcePackage(DiscoveryService.class.getPackage().getName());
+        // Licença
+        //beanConfig.setLicense("Apache 2.0");
+        //beanConfig.setLicenseUrl("http://www.apache.org/licenses/LICENSE-2.0.html");
+        // Contato
+        //beanConfig.setContact("mailto:nailtonjr@dcc.ufba.br");
+        //beanConfig.setDescription("This is the documentation of the "
+        //        + "RESTful API to access Discovery PSWoT functionalities.");
         beanConfig.setScan(true);
         
     }
@@ -69,9 +83,19 @@ public class ApplicationJAXRS extends Application {
     public Set<Class<?>> getClasses() {
         Set<Class<?>> resources = new java.util.HashSet<>();
         addRestResourceClasses(resources);
+        addOutherRestResourceClasses(resources);
         return resources;
     }
 
+    private void addOutherRestResourceClasses(
+            Set<Class<?>> resources) {
+
+        // Recursos do Swagger
+        resources.add(io.swagger.jaxrs.listing.ApiListingResource.class);
+        resources.add(io.swagger.jaxrs.listing.SwaggerSerializers.class);
+
+    }
+    
     private void addRestResourceClasses(
             Set<Class<?>> resources) {
         resources.add(
@@ -81,9 +105,7 @@ public class ApplicationJAXRS extends Application {
         //        br.com.semanticwot.cd.discovery.conf.AuthenticationFilter.class);
         resources.add(
                 br.com.semanticwot.cd.discovery.conf.CrossOriginResourceSharingFilter.class);
-        resources.add(
-                br.com.semanticwot.cd.discovery.services.DiscoveryService.class);
-
+        resources.add(br.com.semanticwot.cd.discovery.services.DiscoveryService.class);
     }
 
 }

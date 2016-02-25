@@ -45,7 +45,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 /**
  * This filter verify the access permissions for a user based on username and
- * passowrd provided in request
+ * password provided in request
  * */
 //@Provider
 public class AuthenticationFilter implements ContainerRequestFilter {

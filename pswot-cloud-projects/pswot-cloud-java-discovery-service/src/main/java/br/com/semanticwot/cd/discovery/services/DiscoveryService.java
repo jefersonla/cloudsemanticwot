@@ -16,6 +16,15 @@
 package br.com.semanticwot.cd.discovery.services;
 
 import br.com.semanticwot.cd.discovery.cache.Cached;
+import br.com.semanticwot.cd.discovery.services.interfaces.Discoverable;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
+import io.swagger.annotations.ApiResponse;
+import io.swagger.annotations.ApiResponses;
+import io.swagger.annotations.Authorization;
+import io.swagger.annotations.Extension;
+import io.swagger.annotations.ExtensionProperty;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -56,7 +65,8 @@ import org.geonames.WebService;
 @Produces({MediaType.TEXT_XML, MediaType.APPLICATION_XML,
     MediaType.APPLICATION_JSON})
 @Cached
-public class DiscoveryService {
+@Api(value = "discovery")
+public class DiscoveryService implements Discoverable {
 
     @Context
     private UriInfo uriInfo;
@@ -64,8 +74,24 @@ public class DiscoveryService {
     @RolesAllowed("ROLE_ADMIN")
     @GET
     @Path("{type}")
-    public Response discovery(@PathParam("type") String typeOfDevice,
+    @ApiOperation(value = "Finds Services by type and location",
+            notes = "The location is based in Geonames, and "
+                    + "the type is based in SSN Ontology",
+            response = Object.class,
+            responseContainer = "List",
+            extensions = {
+                @Extension(name = "outra", properties = {
+                    @ExtensionProperty(name = "type", value = "temperature")
+                })
+            })
+    @ApiResponses(value = {
+        @ApiResponse(code = 400, message = "Invalid request")})
+    public Response discovery(
+            @ApiParam(value = "Type of the device sensor", required = true)
+            @PathParam("type") String typeOfDevice,
+            @ApiParam(value = "Location used for the search", required = true) 
             @QueryParam("location") String location,
+            @ApiParam(value = "Restrict of the semantic search", required = true)
             @QueryParam("matching") @DefaultValue("exact") String matching) {
 
         if (location == null || matching == null) {
@@ -78,7 +104,6 @@ public class DiscoveryService {
         // com o projeto de testes por que a versão mais nova da API não 
         // está no repositório Maven
         //WebService.setUserName("pswot");
-
         // O identificador único do local é o id dele, presente tambem na URI
         // ex: http://sws.geonames.org/3450554/, indica salvador
 //        ToponymSearchCriteria searchCriteria = new ToponymSearchCriteria();
@@ -97,8 +122,7 @@ public class DiscoveryService {
 //                    null, ex);
 //            throw new WebApplicationException(Response.Status.BAD_REQUEST);
 //        }
-
-        return Response.ok().build();
+        return Response.ok("{}").build();
     }
 
     @RolesAllowed("ROLE_ADMIN")
