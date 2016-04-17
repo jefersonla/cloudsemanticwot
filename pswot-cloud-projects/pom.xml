@@ -13,6 +13,7 @@
         <module>pswot-cloud-java-discovery-client</module>
         <module>pswot-cloud-java-model-client</module>
         <module>pswot-cloud-java-jena-tests</module>
+        <module>pswot-cloud-java-jena-schemagenSSN</module>
     </modules>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>

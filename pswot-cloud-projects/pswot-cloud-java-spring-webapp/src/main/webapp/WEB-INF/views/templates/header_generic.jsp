@@ -5,7 +5,7 @@
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!-- Header -->
 <header id="header">
-    <a href="index.html" class="title">${title}</a>
+    <a href="index.html" class="title"></a>
     <nav>
         <ul>
             <li><a href="<c:url value="/"/>">Home</a></li>

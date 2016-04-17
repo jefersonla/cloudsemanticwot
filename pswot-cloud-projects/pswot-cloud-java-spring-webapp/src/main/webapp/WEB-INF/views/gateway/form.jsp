@@ -35,7 +35,7 @@
         <section  class="wrapper style2 fade-up">
             <div class="inner" id="install">
                 <h2>Install WoT Gateway</h2>
-                <p>Edit text.</p>
+                <p>Simple installation a WoT Gateway in your Raspberry PI</p>
                 <div class="split style1">
                     <section>
                         <div style="color: darkorange">
@@ -92,9 +92,7 @@
                         <ul class="contact">
                             <li>
                                 <h3>Info</h3>
-                                <span>12345 Somewhere Road #654<br />
-                                    Nashville, TN 00000-0000<br />
-                                    USA</span>
+                                <span>Video tutorial</span>
                             </li>
                         </ul>
                     </section>

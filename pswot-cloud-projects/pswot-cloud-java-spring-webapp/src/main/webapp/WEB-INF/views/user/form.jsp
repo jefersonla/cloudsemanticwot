@@ -36,8 +36,8 @@
             <!-- Main -->
             <section id="main" class="wrapper">
                 <div class="inner">
-                    <h2>Create PSWoT user</h2>
-                    <p>Edit text.</p>
+                    <h2>PSWoT user</h2>
+                    <p>Create or Edit a SWoT user</p>
                     <div class="split style1">
                         <section>
                             <div style="color: red">

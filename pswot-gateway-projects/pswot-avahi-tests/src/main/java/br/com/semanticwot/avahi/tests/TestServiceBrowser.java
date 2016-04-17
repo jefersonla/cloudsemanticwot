@@ -90,7 +90,7 @@ public class TestServiceBrowser implements IClientCallback,
         // browse for "_test._tcp" services
         browser = client.createServiceBrowser(this,
                 Avahi4JConstants.AnyInterface,
-                Protocol.ANY, "_workstation._tcp", null, 0);
+                Protocol.ANY, "_mqtt._tcp", null, 0);
     }
 
     /**
@@ -207,10 +207,10 @@ public class TestServiceBrowser implements IClientCallback,
     public static void main(String args[]) throws Avahi4JException, IOException,
             NoSuchFieldException, IllegalArgumentException,
             IllegalAccessException {
-        //System.setProperty("java.library.path", "/usr/lib/jni");
-        //Field fieldSysPath = ClassLoader.class.getDeclaredField("sys_paths");
-        //fieldSysPath.setAccessible(true);
-        //fieldSysPath.set(null, null);
+        System.setProperty("java.library.path", "/usr/lib/jni");
+        Field fieldSysPath = ClassLoader.class.getDeclaredField("sys_paths");
+        fieldSysPath.setAccessible(true);
+        fieldSysPath.set(null, null);
         
         TestServiceBrowser b = new TestServiceBrowser();
         b.browse();

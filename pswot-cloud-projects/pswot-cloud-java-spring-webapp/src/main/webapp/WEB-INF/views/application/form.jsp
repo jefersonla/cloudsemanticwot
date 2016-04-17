@@ -40,8 +40,8 @@
             <!-- Main -->
             <section id="main" class="wrapper style5">
                 <div class="inner">
-                    <h2>Create SWoT Application</h2>
-                    <p>Edit text.</p>
+                    <h2>Create a SWoT Application</h2>
+                    <p></p>
                     <div class="split style1">
                         <section id="done">
                             <div style="color: red">

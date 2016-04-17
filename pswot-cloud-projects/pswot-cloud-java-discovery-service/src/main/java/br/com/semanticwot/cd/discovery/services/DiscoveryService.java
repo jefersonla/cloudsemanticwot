@@ -76,12 +76,18 @@ public class DiscoveryService implements Discoverable {
     @Path("{type}")
     @ApiOperation(value = "Finds Services by type and location",
             notes = "The location is based in Geonames, and "
-                    + "the type is based in SSN Ontology",
+            + "the type is based in SSN Ontology",
             response = Object.class,
             responseContainer = "List",
+            authorizations = {
+                @Authorization(
+                        value = "basicAuth"
+                )
+            },
             extensions = {
-                @Extension(name = "outra", properties = {
-                    @ExtensionProperty(name = "type", value = "temperature")
+                @Extension(name = "semantic", properties = {
+                    @ExtensionProperty(name = "type", value
+                            = "htt://ontology/#temperature")
                 })
             })
     @ApiResponses(value = {
@@ -89,7 +95,7 @@ public class DiscoveryService implements Discoverable {
     public Response discovery(
             @ApiParam(value = "Type of the device sensor", required = true)
             @PathParam("type") String typeOfDevice,
-            @ApiParam(value = "Location used for the search", required = true) 
+            @ApiParam(value = "Location used for the search", required = true)
             @QueryParam("location") String location,
             @ApiParam(value = "Restrict of the semantic search", required = true)
             @QueryParam("matching") @DefaultValue("exact") String matching) {

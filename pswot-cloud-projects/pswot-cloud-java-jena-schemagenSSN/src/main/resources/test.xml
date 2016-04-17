@@ -1,0 +1,19 @@
+<rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+         xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+         xmlns="http://example.org/eg#"
+         xml:base="http://example.org/eg">
+    <rdfs:Class rdf:ID="Dog">
+        <rdfs:comment>A class of canine companions</rdfs:comment>
+    </rdfs:Class>
+    <rdf:Property rdf:ID="petName">
+        <rdfs:comment>The name that everyone calls a dog</rdfs:comment>
+        <rdfs:domain rdf:resource="http://example.org/eg#Dog" />
+    </rdf:Property>
+    <rdf:Property rdf:ID="kennelName">
+        <rdfs:comment>Posh dogs have a formal name on their KC certificate</rdfs:comment>
+    </rdf:Property>
+    <Dog rdf:ID="deputy">
+        <rdfs:comment>Deputy is a particular Dog</rdfs:comment>
+        <kennelName>Deputy Dawg of Chilcompton</kennelName>
+    </Dog>
+</rdf:RDF>

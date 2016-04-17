@@ -182,7 +182,7 @@
                 <section  class="wrapper style2 fade-up">
                     <div class="inner" id="install">
                         <h2>Install WoT Gateway</h2>
-                        <p>Edit text.</p>
+                        <p>Simple installation a WoT Gateway in your Raspberry PI</p>
                         <div style="color: greenyellow; padding-bottom: 10px;">
 
                             ${info}
@@ -198,9 +198,7 @@
                                 <ul class="contact">
                                     <li>
                                         <h3>Info</h3>
-                                        <span>12345 Somewhere Road #654<br />
-                                            Nashville, TN 00000-0000<br />
-                                            USA</span>
+                                        <span>Auto install is highly recommended</span>
                                     </li>
                                 </ul>
                             </section>
@@ -212,7 +210,7 @@
                 <section id="three" class="wrapper style1 fade-up">
                     <div class="inner">
                         <h2>My SWoT APP</h2>
-                        <p>Edit text.</p>
+                        <p>Here you can create your SWoT Application</p>
                         <div class="style1">
                             <section>
                                 <div class="table-wrapper">
