@@ -8,9 +8,8 @@
     <modules>
         <module>pswot-avahi-tests</module>
         <module>pswot-avahi4j-maven</module>
-    <module>pswot-gateway-service-zeroconf</module>
-    <module>pswot-gateway-service-modelmanager</module>
-  </modules>
+        <module>pswot-gateway-zeroconf</module>
+    </modules>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
