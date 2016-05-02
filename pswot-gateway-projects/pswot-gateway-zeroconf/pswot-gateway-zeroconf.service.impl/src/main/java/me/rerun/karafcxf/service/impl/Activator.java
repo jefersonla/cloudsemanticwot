@@ -14,6 +14,7 @@ public class Activator implements BundleActivator {
             IllegalArgumentException, NoSuchFieldException, 
             IllegalAccessException, IOException, Exception {
         
+        // http://njbartlett.name/2014/05/26/static-linking.html
         System.setProperty("java.library.path", "/usr/lib/jni");
         Field fieldSysPath = ClassLoader.class.getDeclaredField("sys_paths");
         fieldSysPath.setAccessible(true);
