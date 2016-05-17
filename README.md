@@ -6,3 +6,5 @@
 
 [![Build Status](https://travis-ci.org/nailtonvieira/cloudsemanticwot.svg?branch=master)](https://travis-ci.org/nailtonvieira/cloudsemanticwot)
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/6d53e6a53dfe41c5916dff1af3051a0c)](https://www.codacy.com/app/notlian-junior/cloudsemanticwot?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=nailtonvieira/cloudsemanticwot&amp;utm_campaign=Badge_Grade)
+[![License Badge](https://img.shields.io/github/license/nailtonvieira/cloudsemanticwot.svg)](https://github.com/nailtonvieira/cloudsemanticwot/blob/master/LICENSE)
+[![Issues Badge](https://img.shields.io/github/issues/nailtonvieira/cloudsemanticwot.svg)](https://github.com/nailtonvieira/cloudsemanticwot/issues)
